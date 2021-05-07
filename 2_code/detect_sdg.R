@@ -1,6 +1,11 @@
 require(tidyverse)
-require(detectSGD)
+require(detectSDG)
 source("2_code/helpers.R")
+
+# NOTE
+# .csv are ignored because of github size limitations
+# download files from http://p3.snf.ch/P3Export/P3_GrantExport_with_abstracts.csv (only place in 1_data)
+# install detect from https://github.com/dwulff/detectSDG
 
 # HANDLE PROJECTS ---------
 
@@ -16,15 +21,15 @@ projects = projects %>%
 
 projects_eng = projects %>% filter(is_eng)
 
-# corpus = detectSGD::make_corpus(projects_eng$`Project Title`)
-# sdg_title = detectSGD::detect_elsevier(corpus)
+# corpus = detectSDG::make_corpus(projects_eng$`Project Title`)
+# sdg_title = detectSDG::detect_elsevier(corpus)
 # saveRDS(sdg_title, "1_data/sdg_title.RDS")
-# corpus = detectSGD::make_corpus(projects_eng$Abstract)
-# sdg_abstract = detectSGD::detect_elsevier(corpus)
+# corpus = detectSDG::make_corpus(projects_eng$Abstract)
+# sdg_abstract = detectSDG::detect_elsevier(corpus)
 # saveRDS(sdg_abstract, "1_data/sdg_abstract.RDS")
 # keys = sapply(str_extract_all(projects_eng$Keywords, "[:alpha:]+"), function(x) paste0(x,collapse=' '))
-# corpus = detectSGD::make_corpus(keys)
-# sdg_keywords = detectSGD::detect_elsevier(corpus)
+# corpus = detectSDG::make_corpus(keys)
+# sdg_keywords = detectSDG::detect_elsevier(corpus)
 # saveRDS(sdg_keywords, "1_data/sdg_keys.RDS")
 
 sdgs = as_tibble(readRDS("1_data/sdg_title.RDS")) %>% 
@@ -58,11 +63,11 @@ publications = publications %>%
 
 publications_eng = publications %>% filter(is_eng)
 
-# corpus = detectSGD::make_corpus(publications_eng$`Title of Publication`)
-# sdg_title = detectSGD::detect_elsevier(corpus)
+# corpus = detectSDG::make_corpus(publications_eng$`Title of Publication`)
+# sdg_title = detectSDG::detect_elsevier(corpus)
 # saveRDS(sdg_title, "1_data/sdg_title_pub.RDS")
-# corpus = detectSGD::make_corpus(publications_eng$Abstract)
-# sdg_abstract = detectSGD::detect_elsevier(corpus)
+# corpus = detectSDG::make_corpus(publications_eng$Abstract)
+# sdg_abstract = detectSDG::detect_elsevier(corpus)
 # saveRDS(sdg_abstract, "1_data/sdg_abstract_pub.RDS")
 
 sdgs_pub = as_tibble(readRDS("1_data/sdg_title_pub.RDS")) %>% 
